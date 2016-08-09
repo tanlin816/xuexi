@@ -1,0 +1,3 @@
+/home/tanlin/Imageprocessing/cmake/canny边缘检测/CMakeFiles/rebuild_cache.dir
+/home/tanlin/Imageprocessing/cmake/canny边缘检测/CMakeFiles/edit_cache.dir
+/home/tanlin/Imageprocessing/cmake/canny边缘检测/CMakeFiles/example.dir
