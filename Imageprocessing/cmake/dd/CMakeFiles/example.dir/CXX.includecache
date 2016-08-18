@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tanlin/Imageprocessing/cmake/dd/main.cpp
+stdio.h
+-
+string.h
+-
+sys/types.h
+-
+stdlib.h
+-
+iostream
+-
+

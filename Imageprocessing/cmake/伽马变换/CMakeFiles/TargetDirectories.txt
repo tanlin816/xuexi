@@ -1,0 +1,3 @@
+/home/tanlin/Imageprocessing/cmake/伽马变换/CMakeFiles/rebuild_cache.dir
+/home/tanlin/Imageprocessing/cmake/伽马变换/CMakeFiles/edit_cache.dir
+/home/tanlin/Imageprocessing/cmake/伽马变换/CMakeFiles/example.dir
