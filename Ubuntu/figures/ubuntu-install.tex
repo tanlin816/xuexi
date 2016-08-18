@@ -1,0 +1,562 @@
+\documentclass[12pt]{article}
+%%---------------------------------------------------------------------
+% packages
+% geometry
+\usepackage{geometry}
+% font
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}  %%如果没有它，会有一些 tex 特殊字符无法正常使用，比如连字符。
+\usepackage{xunicode,xltxtra}
+\usepackage[BoldFont,SlantFont,CJKnumber,CJKchecksingle]{xeCJK}  % \CJKnumber{12345}: 一万二千三百四十五
+\usepackage{CJKfntef}  %%实现对汉字加点、下划线等。
+\usepackage{pifont}  % \ding{}
+% math
+\usepackage{amsmath,amsfonts,amssymb}
+% color
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{YELLOW}{RGB}{255,255,224}
+\definecolor{EYE}{RGB}{199,237,204}
+\definecolor{FLY}{RGB}{128,0,128}
+\definecolor{ZHY}{RGB}{139,0,255}
+% graphics
+\usepackage[americaninductors,europeanresistors]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows,shadows,shapes,calc,mindmap,trees,backgrounds}  % placements=positioning
+\usepackage{graphicx}  % \includegraphics[]{}
+\usepackage{subfigure}  %%图形或表格并排排列
+% table
+\usepackage{colortbl,dcolumn}  %% 彩色表格
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+% code
+\usepackage{fancyvrb}
+\usepackage{listings}
+% title
+%\usepackage{titlesec}
+% head/foot
+\usepackage{fancyhdr}
+% ref
+\usepackage{hyperref}
+% pagecolor
+\usepackage[pagecolor={YELLOW}]{pagecolor}
+% tightly-packed lists
+\usepackage{mdwlist}
+
+\usepackage{styles/iplouccfg}
+\usepackage{styles/zhfontcfg}
+\usepackage{styles/iplouclistings}
+\usepackage{enumitem}
+%%---------------------------------------------------------------------
+% settings
+% geometry
+\geometry{left=2cm,right=1cm,top=2cm,bottom=2cm}  %设置 上、左、下、右 页边距
+\linespread{1.5} %行间距
+% font
+\setCJKmainfont{Adobe Kaiti Std}
+%\setmainfont[BoldFont=Adobe Garamond Pro Bold]{Apple Garamond}  % 英文字体
+%\setmainfont[BoldFont=Adobe Garamond Pro Bold,SmallCapsFont=Apple Garamond,SmallCapsFeatures={Scale=0.7}]{Apple Garamond}  %%苹果字体没有SmallCaps
+\setCJKmonofont{Adobe Fangsong Std}
+% graphics
+\graphicspath{{figures/}}
+\tikzset{
+    % Define standard arrow tip
+    >=stealth',
+    % Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=6.5em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,},
+    % Define style for FlyZhyBall
+    FlyZhyBall/.style={
+      circle,
+      minimum size=6mm,
+      inner sep=0.5pt,
+      ball color=red!50!blue,
+      text=white,},
+    % Define style for FlyZhyRectangle
+    FlyZhyRectangle/.style={
+      rectangle,
+      rounded corners,
+      minimum size=6mm,
+      ball color=red!50!blue,
+      text=white,},
+    % Define style for zhyfly
+    zhyfly/.style={
+      rectangle,
+      rounded corners,
+      minimum size=6mm,
+      ball color=red!25!blue,
+      text=white,},
+    % Define style for new rectangle
+    nrectangle/.style={
+      rectangle,
+      draw=#1!50,
+      fill=#1!20,
+      minimum size=5mm,
+      inner sep=0.1pt,}
+}
+\ctikzset{
+  bipoles/length=.8cm
+}
+% code
+\lstnewenvironment{VHDLcode}[1][]{%
+  \lstset{
+    basicstyle=\footnotesize\ttfamily\color{black},%
+    columns=flexible,%
+    framexleftmargin=.7mm,frame=shadowbox,%
+    rulesepcolor=\color{blue},%
+%    frame=single,%
+    backgroundcolor=\color{yellow!20},%
+    xleftmargin=1.2\fboxsep,%
+    xrightmargin=.7\fboxsep,%
+    numbers=left,numberstyle=\tiny\color{blue},%
+    numberblanklines=false,numbersep=7pt,%
+    language=VHDL%
+    }\lstset{#1}}{}
+\lstnewenvironment{VHDLmiddle}[1][]{%
+  \lstset{
+    basicstyle=\scriptsize\ttfamily\color{black},%
+    columns=flexible,%
+    framexleftmargin=.7mm,frame=shadowbox,%
+    rulesepcolor=\color{blue},%
+%    frame=single,%
+    backgroundcolor=\color{yellow!20},%
+    xleftmargin=1.2\fboxsep,%
+    xrightmargin=.7\fboxsep,%
+    numbers=left,numberstyle=\tiny\color{blue},%
+    numberblanklines=false,numbersep=7pt,%
+    language=VHDL%
+    }\lstset{#1}}{}
+\lstnewenvironment{VHDLsmall}[1][]{%
+  \lstset{
+    basicstyle=\tiny\ttfamily\color{black},%
+    columns=flexible,%
+    framexleftmargin=.7mm,frame=shadowbox,%
+    rulesepcolor=\color{blue},%
+%    frame=single,%
+    backgroundcolor=\color{yellow!20},%
+    xleftmargin=1.2\fboxsep,%
+    xrightmargin=.7\fboxsep,%
+    numbers=left,numberstyle=\tiny\color{blue},%
+    numberblanklines=false,numbersep=7pt,%
+    language=VHDL%
+    }\lstset{#1}}{}
+% pdf
+\hypersetup{pdfpagemode=FullScreen,%
+            pdfauthor={Haiyong Zheng},%
+            pdftitle={Title},%
+            CJKbookmarks=true,%
+            bookmarksnumbered=true,%
+            bookmarksopen=false,%
+            plainpages=false,%
+            colorlinks=true,%
+            citecolor=green,%
+            filecolor=magenta,%
+            linkcolor=cyan,%red(default)
+            urlcolor=cyan}
+% section
+%http://tex.stackexchange.com/questions/34288/how-to-place-a-shaded-box-around-a-section-label-and-name
+\newcommand\titlebar{%
+\tikz[baseline,trim left=3.1cm,trim right=3cm] {
+    \fill [cyan!25] (2.5cm,-1ex) rectangle (\textwidth+3.1cm,2.5ex);
+    \node [
+        fill=cyan!60!white,
+        anchor= base east,
+        rounded rectangle,
+        minimum height=3.5ex] at (3cm,0) {
+        \textbf{\thesection.}
+    };
+}%
+}
+%\titleformat{\section}{\Large\bf\color{blue}}{\titlebar}{0.1cm}{}
+% head/foot
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{\color{red}UBUTU'S INSTALL AND SIMPLE USE}%页眉
+\cfoot{\color{red}July2016}%页脚 中
+\lfoot{\color{red}谭琳\ 丁昊\ 崔金娜}%页脚 左
+\rfoot{\color{red}$\cdot$\ \thepage\ $\cdot$}%页脚 右
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%%---------------------------------------------------------------------
+\begin{document}
+\title{\vspace{-2em}Ubuntu 16.04安装教程及简单运用\vspace{0.7em}}%大标题
+\author{谭琳\ 丁昊\ 崔金娜}%作者
+\date{\vspace{-0.7em}2016年7月\vspace{-0.7em}}%日期
+\maketitle\thispagestyle{fancy}%在上部添加横线
+\maketitle
+\tableofcontents 
+\section{ubuntu的安装}
+
+现在实验室用的是ubuntu16.04，至于版本根据ubuntu官方出的最新版为准，因为ubuntu的安装近乎相同，这里以ubuntu16.04的安装为例进行说明。
+
+\subsection{ubuntu的下载}
+
+  在ubuntu官网上下载http://cn.ubuntu.com/download/，如果你电脑的内存少于2GB,选择32位下载，我选择下载的的是64位。下载下来是一个ubuntu-16.04-desktop-amd64.iso的镜像文件，这个下载过程有点长，需要你耐心等待哦！
+
+\subsection{u盘启动器的制作}
+
+  在安装ubuntu之前需要做一个硬件启动器，你可以用easyBCD软件来安装，也可以用u盘来制作u盘启动器，二者我都用过，觉得还是u盘比较简单，这里我就以制作u盘为例。
+
+  首先找个最好是8G的空u盘，插在你的电脑上备用。然后在百度上可以搜软碟通ultraiso，这个在windows7和windows8都可以下载。下载完成后打开ultraiso，点击工具栏的“打开”按钮，选择第一步下载的ubuntu-16.04-desktop-amd64.iso打开。
+
+  再点击工具栏里的“启动”，在弹出的框里，点击“写入硬盘映像”，如图\ref{tu1}所示。
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.6\textwidth]{tu1.jpeg}
+\caption{\small}
+\label{tu1}
+\end{figure}  
+
+  此时，在弹出的框内，硬盘驱动器是你的u盘名，写入方式是USB-DD。下面一步是我们制作的u盘启动器能否启动电脑的关键，点击“便捷启动”，选择“写入新的驱动器引导扇面去”的“Syslinux”。随后，会弹出很多提示框，你可以一路点是到底，这一步的Syslinux写入很快的，最后会提示你安装成功，如若不然，你可重复上面的步骤。如图\ref{tu2}图\ref{tu3}所示。
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.6\textwidth]{tu2.jpeg}
+\caption{}
+\label{tu2}
+\end{figure}  
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.6\textwidth]{tu3.jpeg}
+\caption{}
+\label{tu3}
+\end{figure}  
+  制作u盘启动器的最后一步就是，点击“写入”，大约此过程需要等待写入完成5分钟，随后，在消息里可以看到“刻录成功”，我们点击“返回”即可，如图\ref{tu5}所示。
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.6\textwidth]{tu5.jpeg}
+\caption{}
+\label{tu5}
+\end{figure} 
+ 
+此时，我们的u盘启动器就制作好了，我们可以安装我们的ubuntu啦！
+
+\subsection{ubuntu的安装}
+
+\subsubsection{ubuntu单系统安装}
+
+  1 刚刚安装好的u盘启动器不用拔出，直接重启电脑，一直按快捷键进入boot界面。各款电脑常用快捷键有：笔记本 联想、宏基、三星、方正、海尔、清华同方、戴尔、神舟 F12，华硕、索尼 ESC，惠普、明基 F9；台式机 联想、惠普、宏基、神舟、方正、海尔、清华同方 F12，戴尔 ESC，华硕、明基 F8；
+
+  2 进入boot界面后，选择“USB”那个栏安装，如下图\ref{tu6}所示（因为我按的就是ubuntu，所以有好几个USB选项，第一次装的话，那么就一个）。
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu6.jpeg}
+\caption{}
+\label{tu6}
+\end{figure} 
+
+  3 进入之后，在左侧选择“中文（简体）”，那么右侧就出现了如下图\ref{tu7}所示的安装界面，点击“安装ubuntu”。
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu7.jpeg}
+\caption{}
+\label{tu7}
+\end{figure}
+ 
+  4 在出现的提示框下\ref{tu8}，一般是不选择，直接按“继续”。
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu8.jpeg}
+\caption{}
+\label{tu8}
+\end{figure} 
+
+  5 随后出现安装类型，如下图\ref{tu9}，（因为我已经安装了ubuntu16.04），如果你原先是windows7，你想保留windows7的一些文档、音乐、其他文件可以选择第二个与你原先的并存。在实验室，一般都是单系统，所以你也以选择第三项清除整个磁盘，但是这样在运行一些程序有点卡。所以一般还是选择按“其他选项”，这样可以自己分区，如果你想安装双系统的话，一定的选{\color{red}“其他选项”},至于安装双系统教程下面会说。点击“继续”。
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu9.jpeg}
+\caption{}
+\label{tu9}
+\end{figure} 
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu10.jpeg}
+\caption{}
+\label{tu10}
+\end{figure} 
+
+  6 进入分区界面\ref{tu10}。单击左下角“-”是删除分区，“+”是创建分区。ubuntu分区一般有/boot、/swap、/、/home、/opt五个挂载点。实验室一般安装的都是单系统，这里以安装单系统内存为8G，硬盘空间500G为例，说一下分区。
+
+分区类型选的 都是“逻辑分区”，新分区的位置选择，是“空间起始位置”。
+
+/boot，单系统不用分
+
+/    ，分大约65G就行 ，用于Ext4日志文件系统
+
+/home，分大约250G就行，用于Ext4日志文件系统
+
+/swap，内存在4G以上可以不用考虑，如果要分的话，分大约是内存的1.5-2倍，用于交换空间
+
+/opt ，余下的都分在这个区，用于用于Ext4日志文件系统
+
+  7 分区分好之后选择“现在安装”。
+
+  8 出现您在什么地方的提示框，你只要单击“继续”就可以了。图\ref{tu12}所示
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu12.jpeg}
+\caption{}
+\label{tu12}
+\end{figure} 
+
+  9 在键盘布局选择英语（美国），点击“继续”。图\ref{tu13}所示
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu13.jpeg}
+\caption{}
+\label{tu13}
+\end{figure} 
+
+  10填写个人信息，名字密码，单击“继续”。
+
+  11进入到了安装界面，等待安装
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.5\textwidth]{tu14.jpeg}
+\caption{}
+\label{tu14}
+\end{figure} 
+
+安装完成后，你需要的是重启电脑，图\ref{tu14}所示。开机画面是这样的，你需要输入刚才设置的密码即可。此时你的ubuntu就安装上了你可以使用了哦！
+
+\subsubsection{ubuntu双系统安装}
+
+如果你要装双系统的话，{\color{red}温馨提示一下}，{\color{blue}如果新手的话，操作难免会失误，因此，建议大家操作前，切记注意备份重要数据，本人就是一个血淋淋的例子}。
+
+ 1 双系统也需要下载，制作u盘启动器，在安装之前需要在分区这里用windows7自带的磁盘管理进行分区，打开方法：右键计算机-管理-磁盘管理。如图\ref{tu21}所示
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.2\textwidth]{tu21.jpeg}
+\caption{}
+\label{tu21}
+\end{figure} 
+
+ 2 找一个你电脑上比较大的磁盘就可以啦。方法：对着要压缩的分区右击选择“压缩卷即可”，我分了100G，也可以不用这么大，但记得千万别格式化，也别分配盘符，压缩完就可以了。
+
+ 3 开始安装与上面一样，就是在安装类型时选择“其他选项”，点击“继续”。
+
+ 4 找到其中标有“空闲”的盘符，这个盘符就是我们用于安装ubuntu的100G空间，别去碰别的盘符，小心弄得到时候win7不能用了，甚至品牌机自带的隐藏分区也会被破坏。图\ref{tu23}所示
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu23.jpeg}
+\caption{}
+\label{tu23}
+\end{figure} 
+
+5 点击左下方的“+”，挂载点：/，大小：22000MB ，新分区的类型：主分区，新分区的位置：空间起始位置，用于：EXT4日志文件系统；继续“+”，挂载点：/boot，大小：200MB（一般分100-200MB，但是你的硬盘够大，分1-2G比较好使），新分区的类型：逻辑分区，新分区的位置：空间起始位置，用于：EXT4日志文件系统；挂载点：/home，大小50G：新分区的类型：逻辑分区，新分区的位置：空间起始位置，用于：EXT4日志文件系统；/opt、/swap分区与上面相似，这里就不说了。图\ref{tu24}所示
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.3\textwidth]{tu24.jpeg}
+\caption{}
+\label{tu24}
+\end{figure} 
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.3\textwidth]{tu25.jpeg}
+\caption{}
+\label{tu25}
+\end{figure} 
+
+6 下面步骤与单系统安装一样，就是安装完之后开机界面是这样的\ref{tu25}，你可以上下选择进入windows还是ubuntu。
+
+到目前为止，ubuntu就安装好了，你可以正常使用了！
+\section{ubuntu的简单使用}
+ 安装好ubuntu，接下来就是使用了
+\subsection{ubuntu升级}
+  刚按上ubuntu，需要更新一下，否则许多软件包无法正常使用。
+
+ 1、打开终端：Ctrl+Alt+T 。为了下次方便，打开之后可以在左侧的终端符号除右击选择“锁定到启动器”。如图\ref{tu32}所示
+
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.3\textwidth]{tu32.jpeg}
+\caption{}
+\label{tu32}
+\end{figure} 
+
+ 2、在终端输入： sudo apt-get update
+
+~~~~~~~~~~~~~~~~~~~~~~~sudo apt-get upgrade\\
+{\color{red}注意:}ubuntu下使用{\color{red}“sudo”}是以管理员权限运行命令的！
+\subsection{ubuntu常用命令}
+\subsubsection{ls -al}
+ ls是“list”的意思，它主要是显示文件的文件名与相关属性。“-al”表示列出所有的文件详细的权限与属性（包含第一字符为“.”的隐藏文件）。我以我的电脑为例，在终端输入以上命令，可以出现如图\ref{tu31}
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu31.jpeg}
+\caption{}
+\label{tu31}
+\end{figure} 
+\begin{itemize}
+
+\item 第一列代表这个文件的类型与权限
+
+第一个字符是d代表是目录
+
+第一个字符是-代表是文件
+
+第一个字符是l代表是链接文件
+\item[*] 接下来3个字符为一组，一共三组。每一组的r是可读，w是可写，x是可执行。这三个权限位置循序是不变的，如果没有权限，就用“-”。这三组权限分别代表：
+
+第一组，文件所有者的权限
+
+第二组，同用户组的权限
+
+第三组，其他非本用户组的权限
+
+\item  第二列代表有多少文件名连接到此节点
+
+\item  第三列代表这个文件的所有者账号
+
+\item  第四列代表这个文件的所属用户组
+
+\item  第五列代表这个文件的容量的大小，默认单位为B
+
+\item  第六列代表这个文件的创建文件日期或者最近的修改时间
+
+\item  第七列代表该文件名
+这七个字段的意义重要。尤其第一个字段的9个权限是linux的重点
+
+\end{itemize}
+
+%第一列代表这个文件的类型与权限
+ %第一个字符是d代表是目录
+% 第一个字符是-代表是文件
+% 第一个字符是l代表是链接文件
+% 接下来3个字符为一组，一共三组。每一组的r是可读，w是可写，x是可执行。这三个权限位置循序是不变的，如果没有权限，就用“-”。这三组权限分别代表：
+ %第一组，文件所有者的权限
+% 第二组，同用户组的权限
+ %第三组，其他非本用户组的权限
+%第二列代表有多少文件名连接到此节点
+%第三列代表这个文件的所有者账号
+%第四列代表这个文件的所属用户组
+%第五列代表这个文件的容量的大小，默认单位为B
+%第六列代表这个文件的创建文件日期或者最近的修改时间
+%第七列代表该文件名
+%这七个字段的意义重要。尤其第一个字段的9个权限是linux的重点
+\subsubsection{cd 切换目录命令}
+“cd ..”代表回到上一层目录。“cd /”代表回到根目录。“cd ~”代表回到自己的主文件下即你自己用户名下。“cd -”代表回到上一步目录下。“cd”代表回到自己的主文件下。“cd /home/用户名/想要去的目录/想要去的文件或者子目录”可以从根目录跳转到你想要去的目录或者文件下。你在执行这些命令时，可以用“ls”查看一下执行这一步后都有哪些目录或文件，很容易就理解了。
+\subsubsection{pwd}
+
+“pwd”显示目前所在的目录，当前的一个路径
+\subsubsection{mkdir}
+“mkdir 新的目录名”表示新建新目录。
+
+新建目录是一层层依次建的，即用cd命令依次进入目录里面创建。不过，也可以在进入你想要建总的目录下用“mkdir -p 目录1/目录2/目录3 ”，可以建立三个依次三个子目录。
+\subsubsection{rmdir}
+“rmdir 目录名”可以删除空的目录。
+
+也是cd，进入目录，使用“rmdir”就可以删除刚刚新建的目录，你可以一层层进入删除，可以以用“rkdir -p 目录1/目录2/目录3”，一次性删除。
+{\color{red}注意：}“{\color{red}rmdir}”只能删除{\color{red}空的目录}，即该目录下没有其他目录和文件，如果你想把所有目录下的东西都删掉，可以是用命令“rm -r 目录名”，此目录下的所有东西都可删掉。
+\subsubsection{cp}
+“cp 源文件 目标文件的路径”代表把一个文件复制到另一个文件夹下。
+
+如把test文件夹下的11. 移到桌面上，并重命名为22，“cp test/11.jpg 桌面/22”，用“cd”进入桌面，用“ls”就可以看到桌面出现了一个名为22的图片。上面是在都在家目录下的，如果从用户文件下移到usr里面，用命令“cp test/11.jpg /home/user/22 ”即可。如图\ref{tu33}
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu33.jpeg}
+\caption{}
+\label{tu33}
+\end{figure} 
+
+\subsubsection{rm}
+“rm 文件名/目录名”代表移除文件或目录。
+
+{\color{blue}上面所说的“rm -r”一定要先确认以下你是否该目录真的不要了，删除救不不可恢复了，避免误删}。
+\subsubsection{mv}
+“mv 源文件 目标目录路径”代表移动文件与目录；
+
+“mv 文件名/目录 新的文件名/目录”代表将文件名或者目录名字修改。
+\subsubsection{cat}
+“cat 文件的路径”代表可以查看这个文件的内容。
+\subsubsection{tac}
+“tac 文件的路径”代表反向列示文件的内容。与“cat”相比“tac”从最后一行开始在屏幕上显示。
+\subsubsection{nl}
+“nl 文件的路径”代表添加行号打印。
+\subsubsection{od} 
+“od -t 文件路径”代表可以查看非纯文本文件的内容
+\subsubsection{file}
+“file 文件路径”代表可以查看文件的类型。有时候我们对于一个文件的类型不清楚，我们就可以用上面的命令简单的判断一下这个文件的类型了。
+\subsubsection{locate}
+“locate 部分文件名”代表可以查询出带有这个文件名的文件都会显示出来，但是它不会去硬盘当中访问数据，此时可以用find命令。
+\subsubsection{vim程序编辑器}
+vim分为三种模式，一般模式、编辑模式、命令行模式，我们一般常用前两种
+
+（1）vim进入一般模式
+
+vim 新文件名或者已有的文件名  （要在文件的目录下执行这步，用vim也可以新建一个文档，但要表明它的类型）
+
+（2）vim进入编辑模式
+
+在一般模式下按“A，a，I，i，O，o，R，r”都可进入编辑模式了，你就可以编写你需要的内容
+
+Esc 退出进入一般模式
+
+如果你想退出编辑，Esc+：wq ，就可以退回到终端
+\subsubsection{挂载镜像文件}
+sudo mount -o loop /文件路径 /mnt
+\subsubsection{安装文件}
+sudo apt-get install 软件名（此时软件名是软件源中有的）
+\subsubsection{sudo apt-get}
+查看一下apt-get的常用命令\ref{tu34}
+\begin{figure}[!htb] %插图
+\centering
+\includegraphics[width=0.4\textwidth]{tu34.jpeg}
+\caption{}
+\label{tu34}
+\end{figure} 
+\subsubsection{sudo apt-cache search +文件名}
+可以查看这个软件是否在软件源里
+\subsubsection{apt-cache depends 软件名}
+查询软件可以依赖哪些包
+\subsubsection{sudo apt-get autoclean}
+ 清理旧版本的软件缓存
+\subsubsection{sudo apt-get clean}
+清理所有软件缓存
+\subsubsection{sudo apt autoremove +文件名}
+卸载某些文件夹或者文档
+\subsubsection{gnome-system-monitor}
+关闭一些正在运行的进程，一般用在一个软件卡了的时候。也可以用“killall+程序名”。
+\subsection{ubuntu常用快捷}
+1、ctrl+shift+T 打开终端
+
+2、以下在终端中用
+
+  （1）ctrl+c 中断终端进程
+
+  （2）ctrl+l 清屏
+
+ （3）ctrl+a 跳到行首
+
+ （4）ctrl+d 从光标向右删除
+
+ （5）Tab  输入首字补全文件名，节省时间
+
+  （6）ctrl+d 在没有输入指令时表示关闭终端
+
+3、ctrl+f 在文档中查询文档关键词 
+ 
+4、ctrl+h 查看隐藏文件
+
+5、alt+	Tab 切换窗口
+\end{document}
