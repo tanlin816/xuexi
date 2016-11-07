@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/图像模糊/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/图像模糊/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/图像模糊/CMakeFiles/example.dir

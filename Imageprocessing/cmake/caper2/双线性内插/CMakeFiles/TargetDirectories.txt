@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/双线性内插/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/双线性内插/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/双线性内插/CMakeFiles/example.dir

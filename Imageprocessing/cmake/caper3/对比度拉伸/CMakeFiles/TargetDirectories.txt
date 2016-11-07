@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/对比度拉伸/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/对比度拉伸/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/对比度拉伸/CMakeFiles/example.dir

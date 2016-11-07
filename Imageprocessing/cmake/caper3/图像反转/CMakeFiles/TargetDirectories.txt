@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/图像反转/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/图像反转/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/图像反转/CMakeFiles/example.dir

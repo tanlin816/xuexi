@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/混合/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/混合/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/混合/CMakeFiles/example.dir
