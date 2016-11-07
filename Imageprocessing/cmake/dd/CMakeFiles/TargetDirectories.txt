@@ -1,3 +1,0 @@
-/home/tanlin/Imageprocessing/cmake/dd/CMakeFiles/rebuild_cache.dir
-/home/tanlin/Imageprocessing/cmake/dd/CMakeFiles/edit_cache.dir
-/home/tanlin/Imageprocessing/cmake/dd/CMakeFiles/example.dir

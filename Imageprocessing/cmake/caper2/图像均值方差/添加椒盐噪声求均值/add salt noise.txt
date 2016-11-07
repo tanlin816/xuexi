@@ -1,0 +1,74 @@
+#include<opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+
+    Mat srcimage = imread("22.jpg");
+    if(!srcimage.data)
+
+    {
+
+        cout << "image read is error!" << endl;
+
+        return 0;
+
+    }
+    cout << "image Info:Height:" << srcimage.size().height << " Width:" << srcimage.size().width << endl;
+    imshow("origin",srcimage);
+    Mat dstimage;                                                         //定义一个输出图像；
+    dstimage.create(srcimage.rows,srcimage.cols,srcimage.type());   
+    dstimage=srcimage.clone();
+
+    for(int k=0; k<250; k++) 
+    {
+  
+        int i = rand()%srcimage.rows;
+
+        int j = rand()%srcimage.cols;
+             
+        CvScalar s = srcimage.at<Vec3b>(i,j);
+
+        if(srcimage.channels() == 1)
+
+        {
+
+           s.val[0] = 255;
+
+         }
+
+         else if (srcimage.channels()==3)
+
+         {
+
+            s.val[0]=255;
+
+            s.val[1]=255;
+ 
+            s.val[2]=255;
+
+          }
+          dstimage.at<Vec3b>(i,j)[0]=s.val[0];
+          dstimage.at<Vec3b>(i,j)[1]=s.val[1];
+          dstimage.at<Vec3b>(i,j)[2]=s.val[2];
+          imshow("ff",dstimage);
+          imwrite("250noise.jpg",dstimage);
+    }
+
+
+   waitKey(0);
+   return 0;
+}
+
+
+
+
+
+
+
+
+
+
+

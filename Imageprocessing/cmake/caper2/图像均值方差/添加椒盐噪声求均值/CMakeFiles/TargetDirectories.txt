@@ -1,0 +1,3 @@
+/home/tanlin/Imageprocessing/cmake/图像均值方差/添加椒盐噪声求均值/CMakeFiles/rebuild_cache.dir
+/home/tanlin/Imageprocessing/cmake/图像均值方差/添加椒盐噪声求均值/CMakeFiles/edit_cache.dir
+/home/tanlin/Imageprocessing/cmake/图像均值方差/添加椒盐噪声求均值/CMakeFiles/example.dir

@@ -1,0 +1,3 @@
+/home/tanlin/Imageprocessing/cmake/bit-plane-slicing/restruction/CMakeFiles/rebuild_cache.dir
+/home/tanlin/Imageprocessing/cmake/bit-plane-slicing/restruction/CMakeFiles/edit_cache.dir
+/home/tanlin/Imageprocessing/cmake/bit-plane-slicing/restruction/CMakeFiles/example.dir

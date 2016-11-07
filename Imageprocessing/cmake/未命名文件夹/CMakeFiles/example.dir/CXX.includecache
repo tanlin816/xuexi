@@ -7,13 +7,13 @@
 #IncludeRegexTransform: 
 
 /home/tanlin/Imageprocessing/cmake/未命名文件夹/main.cpp
+opencv2/imgproc/imgproc.hpp
+/home/tanlin/Imageprocessing/cmake/未命名文件夹/opencv2/imgproc/imgproc.hpp
+opencv2/highgui/highgui.hpp
+/home/tanlin/Imageprocessing/cmake/未命名文件夹/opencv2/highgui/highgui.hpp
 iostream
 -
-opencv2/opencv.hpp
--
-opencv2/highgui/highgui.hpp
--
-opencv2/imgproc/imgproc.hpp
+cmath
 -
 
 /usr/local/include/opencv/cxcore.h

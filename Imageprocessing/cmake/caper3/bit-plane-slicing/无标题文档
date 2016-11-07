@@ -1,0 +1,86 @@
+#include <iostream>
+#include <math.h>
+#include<opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+
+	Mat src=imread("11.tif");
+	if(!src.data)
+	{
+		cout << "image read is error!" << endl;
+		return 0;
+	}
+	cout << "Height:" << src.size().height << " Width:" << src.size().width << endl;		
+	imshow("Original Image",src);
+	int r = src.rows;
+	int c = src.cols * src.channels();
+	uchar *data;
+	int n[8]={1,2,3,4,5,6,7,8};
+	for(int w=0;w<8;w++)
+	{
+		
+	//bit分面用位与
+	
+		for(int i = 0; i < r; i ++)
+		{
+
+			data = src.ptr<uchar>(i);
+
+     			for(int j = 0; j < c; j ++)
+
+			{	
+
+				int b=data[j]&2^(n[w]-1);
+				if( b==2^(n[w]-1))
+					data[j] = 255;
+				else  
+					data[j] = 0;
+			}
+		}
+		switch(n[w])
+	 	{
+			case 1:
+				imshow("Bit Level 1", src);
+				imwrite("Bit_Level_1.jpg", src);
+				break;
+			case 2:
+				imshow("Bit Level 2", src);
+				imwrite("Bit_Level_2.jpg", src);
+				break;
+			case 3:
+				imshow("Bit Level 3", src);
+				imwrite("Bit_Level_3.jpg", src);
+				break;
+			case 4:
+				imshow("Bit Level 4", src);
+				imwrite("Bit_Level_4.jpg", src);
+				break;
+			case 5:
+				imshow("Bit Level 5", src);
+				imwrite("Bit_Level_5.jpg", src);
+				break;
+			case 6:
+				imshow("Bit Level 6", src);
+				imwrite("Bit_Level_6.jpg", src);
+				break;
+			case 7:
+				imshow("Bit Level 7", src);
+				imwrite("Bit_Level_7.jpg", src);
+				break;
+			case 8:
+				imshow("Bit Level 8", src);
+				imwrite("Bit_Level_8.jpg", src);
+				break;
+			default:break;
+
+		}
+	}
+	waitKey(0);
+	return 0;
+
+}
+
